@@ -32,55 +32,48 @@ public class Player implements IPlayer{
 	}
 	
 	public final void addCardToHand(Card pc) {
-		/*
-		 * TODO Atelier1
-		 */
+		this.hand.addCard(pc);
 	}
 	
 	public final void addCardToTrickPile(Card pc) {
-		/*
-		 * TODO Atelier1
-		 */
+		this.trickPile.addCard(pc);
 	}
 	
 	public final Card playCard(int index) {
-		Card card = null;
-		/*
-		 * TODO Atelier1
-		 */
-		return card;
+	    if (index >= 0 && index < hand.size()) {
+	        return hand.playCard(index);
+	    }
+	    return null;
 	}
 	
 	public final Card removeCardFromHand(int index) {
 		Card card = null;
-		/*
-		 * TODO Atelier1
-		 */
+		if (index >= 0 && index < hand.size()) {
+			card = hand.removeCard(index);
+		}
 		return card;
 	}
 	
 	public final Card removeCardFromTrickPile(int index) {
 		Card card = null;
-		/*
-		 * TODO Atelier1
-		 */
+		if (index >= 0 && index < trickPile.size()) {
+			card = trickPile.removeCard(index);
+		}
 		return card;
 	}
 	
 	public final boolean revealeCard(int index) {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		if (index >= 0 && index < hand.size()) {
+			return hand.revealeCard(index);
+			}
+		return false;
 	}
 	
 	public final boolean hideCard(int index) {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		if (index >= 0 && index < hand.size()) {
+			return hand.hideCard(index);
+			}
+		return false;
 	}
 	
 	@Override
@@ -89,19 +82,11 @@ public class Player implements IPlayer{
 	}
 	
 	public final boolean isHandEmpty() {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		return this.hand.isEmpty();
 	}
 	
 	public final boolean isTrickPileEmpty() {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		return this.trickPile.isEmpty();
 	}
 	
 	/**
@@ -109,53 +94,32 @@ public class Player implements IPlayer{
 	 */
 	@Override
 	public final boolean isStillActive() {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		return !this.isHandEmpty();
 	}
 
-	
 	/**
 	 * retourne true si le joueur possède toutes les cartes 
 	 * du deck initial 
 	 */
 	public final boolean hasWonAllCards(int deckSize) {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		return hand.size() + trickPile.size() == deckSize;
 	}
 	
 	@Override
 	public final boolean isTrickWinner() {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		return this.isTrickWinner;
 	}
 
 	public final void setTrickWinner(boolean isTrickWinner) {
-		/*
-		 * TODO Atelier1
-		 */
+		this.isTrickWinner = isTrickWinner;
 	}
 
 	public final boolean isGameWinner() {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		return this.isGameWinner;
 	}
 
 	public final void setGameWinner(boolean isGameWinner) {
-		/*
-		 * TODO Atelier1
-		 */
+		this.isGameWinner = isGameWinner;
 	}
 
 	@Override
@@ -169,11 +133,16 @@ public class Player implements IPlayer{
 	 */
 	@Override
 	public int compareTo(IPlayer arg0) {
-		int ret = -999999;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		if (arg0 == null) {
+			return 1;
+		}
+		if (this.name == null) {
+			return -1;
+		}
+		if (arg0.getName() == null) {
+			return 1;
+		}
+		return this.name.compareTo(arg0.getName());
 	}
 
 	/**

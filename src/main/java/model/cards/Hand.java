@@ -12,7 +12,6 @@ import allShared.ICardsCollection;
 
 /**
  * Objet qui contient l'ensemble des cartes de la main d'un joueur
- * 
  * Il est capable d'exécuter les traitements communs à toutes 
  * les collections de cartes (ajouter, supprimer, mélanger, trier, etc.)
  * et en plus révéler, cacher, jouer une carte
@@ -51,58 +50,45 @@ public class Hand implements ICardsCollection {
 
 	@Override
 	public final void addCard(Card pc) {
-		/*
-		 * TODO Atelier1
-		 */
+		cards.add(pc);
 	}
 
 	@Override
 	public final Card removeTopCard() {
-		Card card = null;
-		/*
-		 * TODO Atelier1
-		 */
-		return card;
+		if (cards.isEmpty()) {
+			return null;
+		}
+		return cards.remove(1);
 	}
 
 	@Override
 	public final Card removeCard(int index) {
 		Card card = null;
-		/*
-		 * TODO Atelier1
-		 */
-		return card;
+		if (cards.isEmpty() || index <= 0 || index > cards.size()) {
+			return card;
+		}
+			return cards.remove(index);
 	}
 
 	@Override
 	public final boolean isEmpty() {
-		boolean ret = false;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		return  cards.isEmpty();
 	}
 
 	@Override
 	public final void clear() {
-		/*
-		 * TODO Atelier1
-		 */
+		cards.clear();
 	}
 
 	@Override
 	public final int size() {
-		int ret = 0;
-		/*
-		 * TODO Atelier1
-		 */
-		return ret;
+		return cards.size();
 	}
 
-//	@Override
-//	public String toString() {
-//		return "[" + cards + "]";
-//	}
+	@Override
+	public String toString() {
+		return "[" + cards + "]";
+	}
 
 	/**
 	 * @param index
@@ -112,9 +98,13 @@ public class Hand implements ICardsCollection {
 	public final Card playCard(int index) {
 
 		Card card = null;
-		/*
-		 * TODO Atelier1
-		 */
+		if (cards.isEmpty() || index < 0 || index > cards.size()) {
+			card = null;
+		}
+		else {
+			card = cards.get(index);
+			cards.remove(index);
+		}
 		return card;
 	}
 
@@ -123,11 +113,14 @@ public class Hand implements ICardsCollection {
 	 * @return true si la carte existe 
 	 */
 	public final boolean revealeCard(int index) {
-
 		Card card = null;
-		/*
-		 * TODO Atelier1
-		 */
+		if (cards.isEmpty() || index < 0 || index > cards.size()) {
+			card = null;
+		}
+		else {
+			card = cards.get(index);
+			card.reveale();
+		}
 		return card != null ? true : false;
 	}
 
@@ -136,11 +129,15 @@ public class Hand implements ICardsCollection {
 	 * @return true si la carte existe 
 	 */
 	public final boolean hideCard(int index) {
-
 		Card card = null;
-		/*
-		 * TODO Atelier1
-		 */
+		if (cards.isEmpty() || index < 0 || index > cards.size()) {
+			card = null;
+		}
+		else {
+			card = cards.get(index);
+			card.hide();
+		}
+
 		return card != null ? true : false;
 	}
 
