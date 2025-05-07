@@ -124,7 +124,7 @@ public class Player implements IPlayer{
 
 	@Override
 	public String toString() {
-		return "["+ name + " ** Hand" + hand + " ** trickPile" + trickPile + "]";
+		return name;
 	}
 
 	/*
@@ -153,11 +153,10 @@ public class Player implements IPlayer{
 	 *  2 - en utilisant l'Iterator de manière explicite  
 	 */
 	public void addWonCardsBackToHand() {
-
-		/*
-		 * TODO Atelier2
-		 */
-		  
+        for (Card card : trickPile) {
+            hand.addCard(card);
+        }
+		trickPile.clear();
 	}
 	
 }

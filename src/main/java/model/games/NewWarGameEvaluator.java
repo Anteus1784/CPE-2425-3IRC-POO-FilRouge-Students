@@ -17,20 +17,37 @@ import model.cards.NewWarGameCardComparator;
  */
 public class NewWarGameEvaluator extends AbstractGameEvaluator implements IGameEvaluator {
 
+	private final Comparator<Card> comparator = new NewWarGameCardComparator();
+
+	@Override
 	protected final Card max(ICardsCollection gamingMat) {
+		if (gamingMat == null || gamingMat.isEmpty()) {
+			return null;
+		}
+
 		Card maxCard = null;
-		/*
-		 * TODO Atelier2
-		 */
+
+		for (Card card : gamingMat) {
+			if (!card.isRevealed()) card.reveale(); // sécurité
+
+			if (maxCard == null || comparator.compare(card, maxCard) > 0) {
+				maxCard = card;
+			}
+		}
+
 		return maxCard;
 	}
 
+	@Override
 	protected final int comparaison(Card card, Card maxCard) {
-		int diff = -99999;
-		/*
-		 * TODO Atelier2
-		 */
-		return diff;
+		if (card == null || maxCard == null) {
+			return 0;
+		}
+
+		if (!card.isRevealed()) card.reveale();
+		if (!maxCard.isRevealed()) maxCard.reveale();
+
+		return comparator.compare(card, maxCard);
 	}
 	
 

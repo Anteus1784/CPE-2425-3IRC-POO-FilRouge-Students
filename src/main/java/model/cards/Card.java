@@ -23,8 +23,8 @@ public class Card implements ICard, Comparable<Card>{
 		super();
 		this.rank = rank;
 		this.suit = suit;
-		this.isFaceUp = false;
-//		this.isFaceUp = true;
+//		this.isFaceUp = false;
+		this.isFaceUp = true;
 	}
 	
 	@Override
@@ -87,7 +87,7 @@ public class Card implements ICard, Comparable<Card>{
 	 */
 	@Override
 	public int compareTo(Card pc) {
-		return this.rank.getRank() - pc.getRank().getRank();
+	    return rank.getRank() - pc.getRank().getRank();
 	}
 
 }

@@ -35,110 +35,40 @@ public class Deck extends AbstractCardsCollection {
 	 * 	Roi-Carreau, Roi-Coeur, Roi-Pique, Roi-Trefle, 
 	 * 	As-Carreau, As-Coeur, As-Pique, As-Trefle]]
 	 */
-	
-	/*
-	 *************** TODO ToChange Atelier2 ***************
-	 */
-	
-	private final List<Card> cards; 
 
 	public Deck() {
 		super();
-		cards = new ArrayList<Card>();
 	}
-	
+
 	public Deck(int deckSize) {
 		super();
-		cards = new ArrayList<Card>();
-		
-		/*
-		 * TODO Atelier2
-		 */
+		if (deckSize != 32 && deckSize != 52) {
+			throw new IllegalArgumentException("La taille du deck doit être 32 ou 52");
+		}
 
+		// Pour chaque couleur
+		for (Suit suit : Suit.values()) {
+			// Pour chaque rang
+			for (Rank rank : Rank.values()) {
+				if (deckSize == 32) {
+					// Pour un jeu de 32 cartes, on ne prend que les cartes de 7 et plus
+					if (rank.getRank() >= Rank._7.getRank()) {
+						cards.add(new Card(rank, suit));
+					}
+				} else {
+					// Pour un jeu de 52 cartes, on prend toutes les cartes
+					cards.add(new Card(rank, suit));
+				}
+			}
+		}
 	}
+
 
 	public Deck(Collection<Card> collection) {
-		super();
-		cards = new ArrayList<Card>(collection);
+		super(collection);
 	}
 
-	
 	public Deck(ICardsCollection iCardsCollection) {
-		super();
-		cards = null;
+		super(iCardsCollection);
 	}
-	
-	@Override
-	public void shuffle() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Card removeTopCard() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Card removeCard(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addCard(Card pc) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Card max() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Card max(Comparator<Card> comparator) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void sort() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void sort(Comparator<Card> comparator) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Iterator<Card> iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 }
